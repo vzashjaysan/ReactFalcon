@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   callApi = async () => {
-    const response = await fetch('http://10.74.18.88:4000/getjobinfo');
+    const response = await fetch('http://10.74.18.88:4000/getjobinfo',{headers:{'Access-Control-Allow-Origin':'*'}});
     const body = await response.json();
 
     if (response.status !== 200) throw Error(body.message);
@@ -30,13 +30,12 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
+        <div className="App-intro">
        {
-
           this.state.response.map
         (data=> <ul key={data._id}><li> {data.title} </li> <li> {data.description} </li> </ul>)
        }
-        </p>
+        </div>
       </div>
     );
   }

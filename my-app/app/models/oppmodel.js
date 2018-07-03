@@ -1,9 +1,15 @@
 const mongoose = require('mongoose');
 
-const oppSchema = mongoose.Schema({
-    title: String,
-    description: String
+const OpportunitiesSchema = mongoose.Schema({
+    JobCode: String,
+    JobType: String,
+    Summary: String,
+    PrimarySkills: String,
+    SecondarySkills: String,
+    YearsOfExperience: String,
+    NumberofOpenings: String,
+    JobLocation: String
 }
 );
 
-module.exports = mongoose.model('Opp', oppSchema);
+module.exports = mongoose.model('Opportunities',OpportunitiesSchema);
