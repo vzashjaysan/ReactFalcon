@@ -1,4 +1,4 @@
-const Note = require('../models/opp.model.js');
+const Note = require('../models/oppmodel');
 
 // Create and Save a new Note
 //exports.create = (req, res) => {

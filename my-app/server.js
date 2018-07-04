@@ -25,23 +25,28 @@ JobRouter.route('/getjobinfo1')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.get('/getjobinfo', (req, res) => {
-  //   var awesome_instance = new oppmodel(
+//     var awesome_instance = new oppmodel(
      
-  //     {
-  //       JobCode:"6003",
-  //       JobType:"DotNet Developer",
-  //       Summary:"Responsibilities Power Programmer is an important initiative within Global Delivery to develop a team of Full Stack Developers who will be working",
-  //       PrimarySkills:"Dot net 4.5,MVC,Angular",
-  //       SecondarySkills:"Rest, Web Services, Node JS",
-  //       YearsOfExperience:"4-6 Years",
-  //       NumberofOpenings:"3",
-  //       JobLocation:"Hyderabad"
-  //       }
-  //   );
-  //    awesome_instance.save(function (err) {
-  //    if (err) return handleError(err);
-  //   // saved!
-  // });
+//       {
+//         JobCode:6002,
+//         JobType:"Back End Developers",
+//         Summary:"Responsibilities- * Understand Architecture Requirements and ensure effective Design, Development, Validation and Support activities.,• Good understanding of the technology and domain.,• Ability to lead a team towards a desired goal.,• Ensure continual knowledge management.,• Adherence to the organizational guidelines and processes ",
+//         PrimarySkills:"Angular Js, Node JS, React JS, J2EE, Struts, Spring, Hibernat ",
+//         SecondarySkills:"Rest, Web Services, Node JS",
+//         YearsOfExperience:"4-6 Years",
+//         NumberofOpenings:"14",
+//         JobLocation:"Chennai"
+//         }
+//     );
+//      awesome_instance.save(function (err) {
+//      if (err) return handleError(err);
+//     // saved!
+//   });
+
+
+
+
+
    oppmodel.find({}, (err, Opp) => 
   {
     var result={}
@@ -64,6 +69,41 @@ app.get('/getOpp/:JobCode', (req, res) =>
 })  
 });
 
+
+app.get('/deleteAllJob', (req, res) => 
+{
+ 
+   // oppmodel.findById(req.params.JobCode, (err, Opp) => 
+   oppmodel.remove({}, (err, Opp) => 
+  {
+    
+    var result="Removed All jobs"
+    console.log('delete status'+ Opp)
+    res.json(result )
+})  
+});
+
+
+app.get('/updateopenings/:JobCode', (req, res) => 
+{
+  var code=req.params.JobCode
+  code=code.replace('JobCode=','')
+
+
+  oppmodel.find({'JobCode':code}, (err, Opp) => 
+  {
+    console.log("no of op:" + (Opp[0].NumberofOpenings-1))
+    
+    oppmodel.findOneAndUpdate({'JobCode':code},{$set:{'NumberofOpenings':Opp[0].NumberofOpenings-1}},{new:true},function(err,opp){
+
+   console.log("Updated:" +opp)
+     res.json(opp )
+})
+  })  
+
+  
+ 
+});
 
 
 app.listen(4000, () => {

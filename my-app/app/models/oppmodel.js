@@ -7,7 +7,7 @@ const OpportunitiesSchema = mongoose.Schema({
     PrimarySkills: String,
     SecondarySkills: String,
     YearsOfExperience: String,
-    NumberofOpenings: String,
+    NumberofOpenings: Number,
     JobLocation: String
 }
 );
